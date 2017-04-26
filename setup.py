@@ -8,7 +8,7 @@ os.system('pyrcc5 limestorelib.qrc -o limestorelib/resource.py')
 
 datas = [('/usr/share/applications', ['lime-store.desktop','lime-upmanager.desktop']),
         ('/etc/skel/.config/autostart', ['lime-upmanager.desktop']),
-        ('/usr/share/icons/hicolor/scable/apps', ['apps/lime-store.svg','apps/lime-upmanager.svg']),
+        ('/usr/share/pixmaps/', ['apps/lime-store.png','apps/lime-update-manager.png']),
         ('/usr/share/Lime-Store/diller',glob.glob("diller/*.ts")),
         ('/usr/share/Lime-Store/apps',glob.glob("apps/*.svg"))]
 
