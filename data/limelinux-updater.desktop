@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=Lime GNU/Linux Updater
+Name[tr]=Lime GNU/Linux Güncelleyici
+GenericName=Lime GNU/Linux Updater
+GenericName[tr]=Lime GNU/Linux Güncelleyici
+Icon=limelinux-updater
+Exec=limelinux-updater
+Encoding=UTF-8
+Categories=Qt;System;
+Terminal=false

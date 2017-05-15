@@ -1,16 +1,16 @@
 <RCC>
 	<qresource prefix="/">
-		<file>apps/tumunuSec.svg</file>
-		<file>apps/yenile.svg</file>
-		<file>apps/apply.svg</file>
-		<file>apps/ac-kapa.svg</file>
-		<file>apps/kapat.svg</file>
-		<file>apps/sisTab.png</file>
-		<file>apps/all.svg</file>
-		<file>apps/search.svg</file>
-		<file>apps/settings.svg</file>
-		<file>apps/package-add.svg</file>
-		<file>apps/package-remove.svg</file>
-		<file>apps/baskett.svg</file>
+		<file>images/tumunuSec.svg</file>
+		<file>images/yenile.svg</file>
+		<file>images/apply.svg</file>
+		<file>images/ac-kapa.svg</file>
+		<file>images/kapat.svg</file>
+		<file>images/sisTab.png</file>
+		<file>images/all.svg</file>
+		<file>images/search.svg</file>
+		<file>images/settings.svg</file>
+		<file>images/package-add.svg</file>
+		<file>images/package-remove.svg</file>
+		<file>images/baskett.svg</file>
 	</qresource>
 </RCC>

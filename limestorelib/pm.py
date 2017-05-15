@@ -66,7 +66,7 @@ class pmMainClass(QMainWindow):
         self.mapper = QSignalMapper(self)
 
         self.all_button = QPushButton()
-        self.all_button.setIcon(QIcon(":/apps/all.svg"))
+        self.all_button.setIcon(QIcon(":/images/all.svg"))
         self.all_button.setIconSize(QSize(24,24))
         self.all_button.setStyleSheet(self.button_style)
         self.all_button.pressed.connect(self.paketBilgileriGuncelle)
@@ -99,14 +99,14 @@ class pmMainClass(QMainWindow):
         kutu_1.addWidget(self.search_Line)
 
         self.search_button = QPushButton()
-        self.search_button.setIcon(QIcon(":/apps/search.svg"))
+        self.search_button.setIcon(QIcon(":/images/search.svg"))
         self.search_button.setIconSize(QSize(24,24))
         self.search_button.setStyleSheet(self.button_style)
         self.search_button.pressed.connect(self.searchPackage)
         kutu_1.addWidget(self.search_button)
 
         self.settings_button = QPushButton()
-        self.settings_button.setIcon(QIcon(":/apps/settings.svg"))
+        self.settings_button.setIcon(QIcon(":/images/settings.svg"))
         self.settings_button.setIconSize(QSize(24,24))
         self.settings_button.setStyleSheet(self.button_style)
         self.settings_button.pressed.connect(self.ayarlarBaslat)
@@ -117,7 +117,7 @@ class pmMainClass(QMainWindow):
         kutu_2.addWidget(self.appsList)
 
         self.basket_icon_label = QLabel()
-        self.basket_icon_label.setPixmap(QPixmap(":/apps/baskett.svg").scaled(24,24))
+        self.basket_icon_label.setPixmap(QPixmap(":/images/baskett.svg").scaled(24,24))
         self.basket_icon_label.setFixedWidth(30)
         kutu_3.addWidget(self.basket_icon_label)
 
@@ -129,7 +129,7 @@ class pmMainClass(QMainWindow):
         kutu_3.addWidget(self.group_name_label)
 
         self.apply_button = QPushButton(self.tr("Apply"))
-        self.apply_button.setIcon(QIcon(":/apps/apply.svg"))
+        self.apply_button.setIcon(QIcon(":/images/apply.svg"))
         self.apply_button.setFixedWidth(75)
         self.apply_button.setIconSize(QSize(24,24))
         self.apply_button.setStyleSheet(self.button_style)
@@ -534,13 +534,13 @@ class SettingsWidgetClass(QDialog):
         kur_kaldirKutular.addWidget(label_kur,0,0,1,1)
         kur_kaldirKutular.addWidget(label_kaldir,0,1,1,1)
         button_kur = QPushButton()
-        button_kur.setIcon(QIcon(":/apps/package-add.svg"))
+        button_kur.setIcon(QIcon(":/images/package-add.svg"))
         button_kur.setIconSize(QSize(200,200))
         button_kur.setStyleSheet(self.ebeveyn.button_style)
         button_kur.pressed.connect(self.kurAyarla)
         kur_kaldirKutular.addWidget(button_kur,1,0,1,1)
         button_kaldir = QPushButton()
-        button_kaldir.setIcon(QIcon(":/apps/package-remove.svg"))
+        button_kaldir.setIcon(QIcon(":/images/package-remove.svg"))
         button_kaldir.setIconSize(QSize(200,200))
         button_kaldir.setStyleSheet(self.ebeveyn.button_style)
         button_kaldir.pressed.connect(self.kaldirAyarla)
@@ -615,7 +615,7 @@ class CustomWidgetRepoClass(QWidget):
             pisi.api.remove_repo(self.depoAdi)
             self.ebeveyn.repoListesiDoldur(pisi.api.list_repos(only_active=False))
         except:
-            QMessageBox.warning(self,self.tr("Eror"),self.tr("Please run lime-store root user"))
+            QMessageBox.warning(self,self.tr("Eror"),self.tr("Please run limelinux-store root user"))
 
     def repoAdiEkle(self,isim):
         self.depoAdi = isim

@@ -58,21 +58,21 @@ class umMainClass(QMainWindow):
         kutu_1.addWidget(self.appsList)
 
         self.tumunu_sec_button = QPushButton(self.tr("Select All"))
-        self.tumunu_sec_button.setIcon(QIcon(":/apps/tumunuSec.svg"))
+        self.tumunu_sec_button.setIcon(QIcon(":/images/tumunuSec.svg"))
         self.tumunu_sec_button.setIconSize(QSize(24,24))
         self.tumunu_sec_button.setStyleSheet(self.button_style)
         self.tumunu_sec_button.pressed.connect(self.tumunuSecFonk)
         kutu_2.addWidget(self.tumunu_sec_button)
 
         self.yenile_button = QPushButton(self.tr("Refresh"))
-        self.yenile_button.setIcon(QIcon(":/apps/yenile.svg"))
+        self.yenile_button.setIcon(QIcon(":/images/yenile.svg"))
         self.yenile_button.setIconSize(QSize(24,24))
         self.yenile_button.setStyleSheet(self.button_style)
         self.yenile_button.pressed.connect(self.updateDepo)
         kutu_2.addWidget(self.yenile_button)
 
         self.guncelle_button = QPushButton(self.tr("Update"))
-        self.guncelle_button.setIcon(QIcon(":/apps/apply.svg"))
+        self.guncelle_button.setIcon(QIcon(":/images/apply.svg"))
         self.guncelle_button.setIconSize(QSize(24,24))
         self.guncelle_button.setStyleSheet(self.button_style)
         self.guncelle_button.pressed.connect(self.operationWidgetRun)
@@ -178,13 +178,13 @@ class sistemTablasi(QWidget):
         super(sistemTablasi,self).__init__(ebeveyn)
         self.ebeveyn = ebeveyn
         self.tablaSimgesi = QSystemTrayIcon(self)
-        self.tablaSimgesi.setIcon(QIcon(":/apps/sisTab.png"))
+        self.tablaSimgesi.setIcon(QIcon(":/images/sisTab.png"))
         self.tablaSimgesi.show()
         self.tablaSimgesi.activated.connect(self.ebeveyn.pencereBuyutKucultSignal)
         menu = QMenu("Context Menu", self)
-        menu.addAction(QAction(QIcon(":/apps/ac-kapa.svg"),self.tr("Max-Min"),self,statusTip=self.tr("Max-Min"),triggered=self.ebeveyn.pencereBuyutKucult,checkable=False))
-        menu.addAction(QAction(QIcon(":/apps/yenile.svg"),self.tr("Refresh"),self,statusTip=self.tr("Refresh"),triggered=self.ebeveyn.updateDepo,checkable=False))
-        menu.addAction(QAction(QIcon(":/apps/kapat.svg"),self.tr("Close"),self,statusTip=self.tr("Close"),triggered=self.ebeveyn.kapat,checkable=False))
+        menu.addAction(QAction(QIcon(":/images/ac-kapa.svg"),self.tr("Max-Min"),self,statusTip=self.tr("Max-Min"),triggered=self.ebeveyn.pencereBuyutKucult,checkable=False))
+        menu.addAction(QAction(QIcon(":/images/yenile.svg"),self.tr("Refresh"),self,statusTip=self.tr("Refresh"),triggered=self.ebeveyn.updateDepo,checkable=False))
+        menu.addAction(QAction(QIcon(":/images/kapat.svg"),self.tr("Close"),self,statusTip=self.tr("Close"),triggered=self.ebeveyn.kapat,checkable=False))
         self.tablaSimgesi.setContextMenu(menu)
 
     def mesajGoster(self):

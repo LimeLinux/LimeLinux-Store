@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=Lime GNU/Linux Store
+Name[tr]=Lime GNU/Linux Store
+GenericName=Add or Remove Software
+GenericName[tr]=Yazılım Ekle ve Kaldır
+Icon=limelinux-store
+Type=Application
+Exec=limelinux-store
+Encoding=UTF-8
+Categories=Qt;System;
+Terminal=false

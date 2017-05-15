@@ -19,25 +19,32 @@
 #  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 #  MA 02110-1301, USA
 
+
 import sys
 import os
+
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
-import pisi.api
-import pisi.db
+
 from dbus.mainloop.glib import DBusGMainLoop
 import comar
-from limestorelib import pm, um, resource
+import pisi.api
+import pisi.db
 
-if __name__ == "__main__":
+from limestorelib import pm, resource
+
+
+def main():
     uyg = QApplication(sys.argv)
-    uyg.setOrganizationName('limelinux-update-manager')
-    uyg.setQuitOnLastWindowClosed(False)
     locale = QLocale.system().name()
     translator = QTranslator(uyg)
-    translator.load("diller/{}.qm".format(locale))
+    translator.load("/usr/share/limelinux-store/languages/{}.qm".format(locale))
     uyg.installTranslator(translator)
-    ana = um.umMainClass()
-#    ana.show()
+    ana = pm.pmMainClass()
+    ana.show()
     sys.exit(uyg.exec_())
+
+
+if __name__ == "__main__":
+    main()
