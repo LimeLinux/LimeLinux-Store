@@ -165,10 +165,10 @@ class CustomWidgetPackageClass(QWidget):
     def paketAdiIconEkle(self,paketAdi):
         self.paketAdi = paketAdi
         self.paket_adi.setText(self.paketAdi)
-        if os.path.exists("/usr/share/Lime-Store/apps/"+paketAdi+".svg"):
-            self.paket_icon.setPixmap(QPixmap("/usr/share/Lime-Store/apps/"+paketAdi+".svg").scaled(32,32))
+        if os.path.exists("/usr/share/limelinux-store/apps/"+paketAdi+".svg"):
+            self.paket_icon.setPixmap(QPixmap("/usr/share/limelinux-store/apps/"+paketAdi+".svg").scaled(32,32))
         else:
-            self.paket_icon.setPixmap(QPixmap("/usr/share/Lime-Store/apps/package.svg").scaled(32,32))
+            self.paket_icon.setPixmap(QPixmap("/usr/share/limelinux-store/apps/package.svg").scaled(32,32))
 
     def checkBoxTrue(self):
         self.guncelle_check_box.setChecked(True)

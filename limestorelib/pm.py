@@ -82,7 +82,7 @@ class pmMainClass(QMainWindow):
                     button = QPushButton()
                     button.setToolTip(name)
                     button.setWhatsThis(i)
-                    button.setIcon(QIcon("/usr/share/Lime-Store/apps/"+name+".svg"))
+                    button.setIcon(QIcon("/usr/share/limelinux-store/apps/"+name+".svg"))
                     button.setIconSize(QSize(20,20))
                     button.setFixedWidth(20)
                     button.setFixedHeight(20)
@@ -253,10 +253,10 @@ class CustomWidgetPackageClass(QWidget):
         self.text_label.setText(icon_Url)
 
     def setIcon(self,icon_Url):
-        if os.path.exists("/usr/share/Lime-Store/apps/"+icon_Url+".svg"):
-            self.icon_label.setIcon(QIcon("/usr/share/Lime-Store/apps/"+icon_Url+".svg"))
+        if os.path.exists("/usr/share/limelinux-store/apps/"+icon_Url+".svg"):
+            self.icon_label.setIcon(QIcon("/usr/share/limelinux-store/apps/"+icon_Url+".svg"))
         else:
-            self.icon_label.setIcon(QIcon("/usr/share/Lime-Store/apps/package.svg"))
+            self.icon_label.setIcon(QIcon("/usr/share/limelinux-store/apps/package.svg"))
         self.icon_label.setIconSize(QSize(128,128))
 
     def buttonDeletePressed(self):
@@ -370,10 +370,10 @@ class InfoWidgetClass(QDialog):
                     text_description += (i + "\n")
 
     def setIcon(self,icon_Url):
-        if os.path.exists("/usr/share/Lime-Store/apps/"+icon_Url+".svg"):
-            self.icon_label.setPixmap(QPixmap("/usr/share/Lime-Store/apps/"+icon_Url+".svg").scaled(128,128))
+        if os.path.exists("/usr/share/limelinux-store/apps/"+icon_Url+".svg"):
+            self.icon_label.setPixmap(QPixmap("/usr/share/limelinux-store/apps/"+icon_Url+".svg").scaled(128,128))
         else:
-            self.icon_label.setPixmap(QPixmap("/usr/share/Lime-Store/apps/package.svg").scaled(128,128))
+            self.icon_label.setPixmap(QPixmap("/usr/share/limelinux-store/apps/package.svg").scaled(128,128))
 
 class OperationWidgetClass(QDialog):
     def __init__(self,ebeveyn=None):
