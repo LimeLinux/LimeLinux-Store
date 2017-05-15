@@ -9,8 +9,8 @@ os.system('pyrcc5 limestorelib.qrc -o limestorelib/resource.py')
 datas = [
     ('/usr/share/applications', glob.glob("data/*.desktop")),
     ('/etc/skel/.config/autostart', ['data/limelinux-updater.desktop']),
-    ('/usr/share/icons/hicolor/scalable/apps', ['data/limelinux-store.png','data/lime-update-manager.png']),
-    #('/usr/share/icons/hicolor/scalable/mimetypes', ["data/application-x-pisi.svg"]),
+    ('/usr/share/icons/hicolor/scalable/apps', ['data/limelinux-store.svg','data/lime-update-manager.svg']),
+    ('/usr/share/icons/hicolor/scalable/mimetypes', ["data/application-x-pisi.svg"]),
     ('/usr/share/limelinux-store/languages',glob.glob("languages/*.qm")),
     ('/usr/share/limelinux-store/apps', glob.glob("apps/*.svg"))
 ]
