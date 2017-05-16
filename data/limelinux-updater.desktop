@@ -1,9 +1,9 @@
 [Desktop Entry]
 Type=Application
-Name=Lime GNU/Linux Updater
-Name[tr]=Lime GNU/Linux Güncelleyici
-GenericName=Lime GNU/Linux Updater
-GenericName[tr]=Lime GNU/Linux Güncelleyici
+Name=System Updater
+Name[tr]=Sistem Güncelleyici
+GenericName=System Updater
+GenericName[tr]=Sistem Güncelleyici
 Icon=limelinux-updater
 Exec=limelinux-updater
 Encoding=UTF-8

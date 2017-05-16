@@ -12,5 +12,7 @@
 		<file>images/package-add.svg</file>
 		<file>images/package-remove.svg</file>
 		<file>images/baskett.svg</file>
+		<file>images/limelinux-store.svg</file>
+		<file>images/limelinux-updater.svg</file>
 	</qresource>
 </RCC>
