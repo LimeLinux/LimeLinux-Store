@@ -32,9 +32,10 @@ import comar
 import pisi.api
 import pisi.db
 
-class pmMainClass(QMainWindow):
+class StoreWindow(QMainWindow):
     def __init__(self,ebeveyn=None):
-        super(pmMainClass,self).__init__(ebeveyn)
+        super(StoreWindow, self).__init__(ebeveyn)
+        self.setWindowIcon(QIcon(":/images/limelinux-store.svg"))
         self.ebeveyn = ebeveyn
         self.name = "main"
 
@@ -50,7 +51,7 @@ class pmMainClass(QMainWindow):
         merkezWidget.setLayout(kutular)
         self.setCentralWidget(merkezWidget)
         self.setMinimumSize(1000,600)
-        self.setWindowTitle(self.tr("Package Shop"))
+        self.setWindowTitle(self.tr("Software Store"))
         self.installApps = pisi.api.list_installed()
         self.listedeki_paketler = pisi.api.list_available()
 
@@ -59,6 +60,7 @@ class pmMainClass(QMainWindow):
         self.kaldirilacaklar = []
         self.kurulacaklar = []
         self.guncellenecekler = []
+        self.tumunuSec = False
 
         self.button_style = "border: none"
         self.groups = {}
@@ -128,6 +130,14 @@ class pmMainClass(QMainWindow):
         self.group_name_label = QLabel("All")
         kutu_3.addWidget(self.group_name_label)
 
+        self.select_All_button = QPushButton(self.tr("Select All"))
+        self.select_All_button.setIcon(QIcon(":/images/tumunuSec.svg"))
+        self.select_All_button.setIconSize(QSize(24, 24))
+        self.select_All_button.setFixedWidth(100)
+        self.select_All_button.setStyleSheet(self.button_style)
+        self.select_All_button.pressed.connect(self.tumunuSecFonk)
+        kutu_3.addWidget(self.select_All_button)
+
         self.apply_button = QPushButton(self.tr("Apply"))
         self.apply_button.setIcon(QIcon(":/images/apply.svg"))
         self.apply_button.setFixedWidth(75)
@@ -135,6 +145,12 @@ class pmMainClass(QMainWindow):
         self.apply_button.setStyleSheet(self.button_style)
         self.apply_button.pressed.connect(self.operationWidgetRun)
         kutu_3.addWidget(self.apply_button)
+
+    def tumunuSecFonk(self):
+        self.listAdd = True
+        self.tumunuSec = True
+        self.packagesAddList(self.listedeki_paketler)
+        self.tumunuSec = False
 
     def ayarlarBaslat(self):
         ayarlarPencere = SettingsWidgetClass(self)
@@ -155,7 +171,7 @@ class pmMainClass(QMainWindow):
         self.packagesAddList(self.groupPackages)
 
     def paketBilgileriGuncelle(self):
-        self.listAdd = True
+        self.listAdd = False
         all_packages = pisi.api.list_available()
         all_packages.sort()
         self.group_name_label.setText("All")
@@ -163,7 +179,7 @@ class pmMainClass(QMainWindow):
         self.packagesAddList(all_packages)
 
     def paketListesiYenile(self):
-        self.listAdd = True
+        self.listAdd = False
         self.packagesAddList(self.listedeki_paketler)
 
     def operationWidgetRun(self):
@@ -195,6 +211,12 @@ class pmMainClass(QMainWindow):
                         customListWidgetItem = QListWidgetItem(self.appsList)
                         customListWidgetItem.setSizeHint(customWidget.sizeHint())
                         self.appsList.setItemWidget(customListWidgetItem,customWidget)
+                        if self.tumunuSec:
+                            if self.appsname in self.kurulacaklar:
+                                customWidget.basket_check_box.setChecked(False)
+                            else:
+                                customWidget.basket_check_box.setChecked(True)
+
                 elif self.kur_kaldir == "Kaldır":
                     if i in self.installApps:
                         customWidget = CustomWidgetPackageClass(self)
@@ -205,6 +227,12 @@ class pmMainClass(QMainWindow):
                         customListWidgetItem = QListWidgetItem(self.appsList)
                         customListWidgetItem.setSizeHint(customWidget.sizeHint())
                         self.appsList.setItemWidget(customListWidgetItem,customWidget)
+                        if self.tumunuSec:
+
+                            if self.appsname in self.kaldirilacaklar:
+                                customWidget.basket_check_box.setChecked(False)
+                            else:
+                                customWidget.basket_check_box.setChecked(True)
                 qApp.processEvents()
             else:
                 break
@@ -253,10 +281,31 @@ class CustomWidgetPackageClass(QWidget):
         self.text_label.setText(icon_Url)
 
     def setIcon(self,icon_Url):
-        if os.path.exists("/usr/share/limelinux-store/apps/"+icon_Url+".svg"):
-            self.icon_label.setIcon(QIcon("/usr/share/limelinux-store/apps/"+icon_Url+".svg"))
+        info = pisi.api.info(icon_Url)
+        text = str(info[0]).split("\n")
+
+        yeni_Icon_Name = None
+        for i in text:
+            split_text = i.split(":")
+            if len(split_text) > 0 and split_text[0] == "Icon":
+                yeni_Icon_Name = split_text[1][1:]
+                break
+
+        if yeni_Icon_Name != "None":
+            if os.path.exists("/usr/share/limelinux-store/apps/" + yeni_Icon_Name + ".svg"):
+                self.icon_label.setIcon(QIcon("/usr/share/limelinux-store/apps/" + yeni_Icon_Name + ".svg"))
+
+            elif os.path.exists("/usr/share/limelinux-store/apps/" + icon_Url + ".svg"):
+                self.icon_label.setIcon(QIcon("/usr/share/limelinux-store/apps/" + icon_Url + ".svg"))
+
+            else:
+                self.icon_label.setIcon(QIcon("/usr/share/limelinux-store/apps/package.svg"))
+
         else:
-            self.icon_label.setIcon(QIcon("/usr/share/limelinux-store/apps/package.svg"))
+            if os.path.exists("/usr/share/limelinux-store/apps/" + icon_Url + ".svg"):
+                self.icon_label.setIcon(QIcon("/usr/share/limelinux-store/apps/" + icon_Url + ".svg"))
+            else:
+                self.icon_label.setIcon(QIcon("/usr/share/limelinux-store/apps/package.svg"))
         self.icon_label.setIconSize(QSize(128,128))
 
     def buttonDeletePressed(self):
@@ -461,7 +510,7 @@ class OperationWidgetClass(QDialog):
             self.ebeveyn.ebeveyn.installApps = pisi.api.list_installed()
             self.ebeveyn.ebeveyn.paketListesiYenile()
         elif self.ebeveyn.name == "um":
-            self.ebeveyn.updateDepo()
+            self.ebeveyn.updateRepo()
 
     def donut(self,package,signal,args):
         if signal == "status":
