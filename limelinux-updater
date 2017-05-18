@@ -22,21 +22,73 @@
 import sys
 import os
 from PyQt5.QtCore import *
-from PyQt5.QtGui import *
+from PyQt5.QtNetwork import *
 from PyQt5.QtWidgets import *
 import pisi.api
 import pisi.db
 from dbus.mainloop.glib import DBusGMainLoop
 import comar
-from limestorelib import pm, um, resource
+from limestorelib import resource
+from limestorelib.updater import UpdaterWindow
 
-if __name__ == "__main__":
+
+class SingleApplication(QObject):
+
+    newInstance = pyqtSignal()
+    urlPost = pyqtSignal(str)
+
+    def __init__(self):
+        super(SingleApplication, self).__init__()
+        self.mServer = QLocalServer()
+        self.mServer.newConnection.connect(self.newConnection)
+
+    def listen(self, client):
+        self.mServer.removeServer(client)
+        self.mServer.listen(client)
+        print(self.mServer.errorString())
+
+    def hasPrevious(self, name, args):
+        socket = QLocalSocket()
+        socket.connectToServer(name, QLocalSocket.ReadWrite)
+        if socket.waitForConnected():
+            if len(args) > 1:
+                socket.write(args[1])
+
+            else:
+                pass
+
+            socket.flush()
+            return True
+
+        return False
+
+    def newConnection(self):
+        self.newInstance.emit()
+        self.mSocket = self.mServer.nextPendingConnection()
+        self.mSocket.readyRead.connect(self.readyRead)
+
+    def readyRead(self):
+        self.urlPost.emit(str(self.mSocket.readAll()))
+        self.mSocket.close()
+
+
+def main():
     uyg = QApplication(sys.argv)
     uyg.setQuitOnLastWindowClosed(False)
     locale = QLocale.system().name()
     translator = QTranslator(uyg)
     translator.load("/usr/share/limelinux-store/languages/{}.qm".format(locale))
     uyg.installTranslator(translator)
-    ana = um.umMainClass()
+
+    single = SingleApplication()
+    if single.hasPrevious("limelinux-updater", uyg.arguments()):
+        return False
+
+    single.listen("limelinux-updater")
+
+    ana = UpdaterWindow()
 #    ana.show()
     sys.exit(uyg.exec_())
+
+if __name__ == "__main__":
+    main()
