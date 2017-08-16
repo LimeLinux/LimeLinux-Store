@@ -76,7 +76,7 @@ class UpdaterWindow(QWidget):
         self.updateListWidget.clear()
 
         for i in guncellenecek_paketler:
-            customWidget = CustomWidgetPackageClass(self)
+            customWidget = CustomItem(self)
             customWidget.paketAdiIconEkle(i)
 
             customListWidgetItem = QListWidgetItem(self.updateListWidget)
@@ -121,32 +121,32 @@ class UpdaterWindow(QWidget):
         else:
             self.setVisible(True)
 
-class CustomWidgetPackageClass(QWidget):
+class CustomItem(QWidget):
 
     path = "/usr/share/limelinux-store/apps"
 
     def __init__(self, parent=None):
-        super(CustomWidgetPackageClass, self).__init__(parent)
+        super(CustomItem, self).__init__(parent)
         self.parent = parent
 
         kutular = QGridLayout()
         self.setLayout(kutular)
-        self.guncelle_check_box = QCheckBox(self.tr("Update"))
-        self.guncelle_check_box.setFixedWidth(120)
-        self.guncelle_check_box.stateChanged.connect(self.checkBoxPressed)
-        kutular.addWidget(self.guncelle_check_box,0,0,1,1)
-        self.paket_icon = QLabel()
-        self.paket_icon.setFixedWidth(32)
-        kutular.addWidget(self.paket_icon,0,1,1,1)
-        self.paket_adi = QLabel()
-        kutular.addWidget(self.paket_adi,0,2,1,1)
+        self.updateCheckBox = QCheckBox(self.tr("Update"))
+        self.updateCheckBox.setFixedWidth(120)
+        self.updateCheckBox.stateChanged.connect(self.checkBoxPressed)
+        kutular.addWidget(self.updateCheckBox, 0, 0, 1, 1)
+        self.packageIcon = QLabel()
+        self.packageIcon.setFixedWidth(32)
+        kutular.addWidget(self.packageIcon, 0, 1, 1, 1)
+        self.packageName = QLabel()
+        kutular.addWidget(self.packageName, 0, 2, 1, 1)
 
     def checkBoxPressed(self):
-        if self.guncelle_check_box.isChecked():
-            self.guncelle_check_box.setText(self.tr("Updated"))
+        if self.updateCheckBox.isChecked():
+            self.updateCheckBox.setText(self.tr("Updated"))
             self.parent.guncellenecekler.append(self.paketAdi)
         else:
-            self.guncelle_check_box.setText(self.tr("Update"))
+            self.updateCheckBox.setText(self.tr("Update"))
             self.parent.guncellenecekler.remove(self.paketAdi)
 
     def paketAdiIconEkle(self,paketAdi):
@@ -163,23 +163,23 @@ class CustomWidgetPackageClass(QWidget):
         if yeni_Icon_Name != "None":
 
             if os.path.exists(os.path.join(self.path, yeni_Icon_Name + ".svg")):
-                self.paket_icon.setPixmap(QPixmap(os.path.join(self.path, yeni_Icon_Name + ".svg")))
+                self.packageIcon.setPixmap(QPixmap(os.path.join(self.path, yeni_Icon_Name + ".svg")))
 
             elif os.path.exists(os.path.join(self.path, self.paketAdi + ".svg")):
-                self.paket_icon.setPixmap(QPixmap(os.path.join(self.path, self.paketAdi + ".svg")))
+                self.packageIcon.setPixmap(QPixmap(os.path.join(self.path, self.paketAdi + ".svg")))
 
             else:
-                self.paket_icon.setPixmap(QPixmap(os.path.join(self.path, "package.svg")))
+                self.packageIcon.setPixmap(QPixmap(os.path.join(self.path, "package.svg")))
 
         else:
             if os.path.exists(os.path.join(self.path, self.paketAdi + ".svg")):
-                self.paket_icon.setPixmap(QPixmap(os.path.join(self.path, self.paketAdi + ".svg")))
+                self.packageIcon.setPixmap(QPixmap(os.path.join(self.path, self.paketAdi + ".svg")))
 
             else:
-                self.paket_icon.setPixmap(QPixmap(os.path.join(self.path, "package.svg")))
+                self.packageIcon.setPixmap(QPixmap(os.path.join(self.path, "package.svg")))
 
     def setChecked(self, check):
-        self.guncelle_check_box.setChecked(check)
+        self.updateCheckBox.setChecked(check)
 
 
 class SystemTray(QSystemTrayIcon):
